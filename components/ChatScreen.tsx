@@ -7,7 +7,7 @@ import { Avatar, IconButton } from "@material-ui/core";
 import { AttachFile, MoreVert, InsertEmoticon, Mic } from "@material-ui/icons";
 import { useCollection } from "react-firebase-hooks/firestore";
 import Message from "./Message";
-import { MouseEvent, useRef, useState } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
 import firebase from "firebase";
 import getRecipientEmail from "../utils/getRecipientEmail";
 import TimeAgo from "timeago-react"
@@ -35,6 +35,10 @@ const ChatScreen: React.FC<IChatScreen> = ({ chat, messages }) => {
             .collection("users")
             .where("email", "==", getRecipientEmail(chat.users, user))
     );
+
+    useEffect(() => {
+        scrollToBottom()
+    }, [])
 
     const showMessages = () => {
         if (messagesSnapshot) {
