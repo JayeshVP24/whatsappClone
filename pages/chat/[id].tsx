@@ -39,6 +39,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     const messages = messagesRes.docs.map(doc => ({
         ...doc.data(),
+        timestamp: doc.data().timestamp,
         id: doc.id,
     })).map(messages => ({
         ...messages,
